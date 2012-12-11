@@ -13,7 +13,7 @@ DEBUG = True
 FLATPAGES_AUTO_RELOAD = DEBUG
 FLATPAGES_EXTENSION = '.md'
 FLATPAGES_ROOT = 'content'
-FREEZER_REMOVE_EXTRA_FILES = False
+FREEZER_REMOVE_EXTRA_FILES = False # We do this ourselves
 POST_DIR = 'posts'
 PAGE_DIR = 'pages'
 TAG_TITLE = 'Posts tagged <strong>{}</strong>'
@@ -152,7 +152,10 @@ def build():
             try:
                 os.unlink(os.path.join(folder, file))
             except Exception, e:
-                print e
+                try:
+                    shutil.rmtree(os.path.join(folder, file))
+                except Exception, e:
+                    pass
     freezer.freeze()
 
 
