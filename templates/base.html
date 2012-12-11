@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>{% block title %}Home{% endblock title %} | Jeremy Axmacher's Writings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('pygments_css') }}" type="text/css">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+  </head>
+  <body>
+    <div class="container">
+      <div class="top">
+          <div class="header">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='img/header.png') }}" />
+            </a>
+          </div>
+          <div class="navigation">
+            <ul>
+              <li><a href="{{ url_for('index') }}">blog</a> | 
+              <li><a href="/archive/">archive</a> | 
+              <li><a href="/tags/">tags</a> | 
+              <li><a href="/projects/">projects</a> | 
+              <li><a href="{{ url_for('page', name='about') }}">about</a>
+            </ul>
+          </div>
+      </div>
+      <div class="body">
+      {% block content %}
+      {% endblock content %}
+      </div>
+      <div class="footer">
+        <p>&copy; Copyright 2012 by Jeremy Axmacher.</p>
+        <p>
+          Content licensed under the Creative Commons
+          attribution-noncommercial-sharealike License.
+        </p>
+        <p>
+          Contact me via <a href="mailto:jeremy@obsoleter.com">mail</a> or 
+          <a href="http://github.com/obsoleter">github</a>.
+        </p>
+        <!--
+        (<a href="/feed.atom" rel="alternate" title="Recent Blog Posts">feed</a>)
+        -->
+      </div>
+    </div>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-27161477-1']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

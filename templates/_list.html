@@ -1,0 +1,20 @@
+{% import 'dates.html' as dates %}
+<ul>
+{% for post in posts %}
+  <div class="entry-list-item">
+    <div class="date">{{ dates.pretty_date(post.date) }}</div>
+    <div class="detail">
+     <h1 class="entry-list-item">
+     <a href="{{ url_for_post(post) }}">
+         {{ post.title }}
+     </a>
+     </h1><div class="summary">
+     <p>{{ post.summary }}</p>
+     </div>
+    </div>
+  </div>
+{% endfor %}
+</ul>
+{% if not posts %}
+    <p>No posts</p>
+{% endif %}

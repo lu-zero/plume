@@ -1,0 +1,6 @@
+{% macro pretty_date(date) -%}
+    {{ date.strftime('%b %d, %Y').replace(' 0', ' ') }}
+{%- endmacro %}
+{% macro pretty_day_date(date) -%}
+    {{ date.strftime('%A, %b %d, %Y').replace(' 0', ' ') }}
+{%- endmacro %}
