@@ -1,7 +1,7 @@
 import os
 import re
 import sys
-import yaml
+import shutil
 import datetime
 import translitcodec
 from flask import Flask, render_template, Response, url_for
