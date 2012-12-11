@@ -13,6 +13,7 @@ DEBUG = True
 FLATPAGES_AUTO_RELOAD = DEBUG
 FLATPAGES_EXTENSION = '.md'
 FLATPAGES_ROOT = 'content'
+FREEZER_REMOVE_EXTRA_FILES = False
 POST_DIR = 'posts'
 PAGE_DIR = 'pages'
 TAG_TITLE = 'Posts tagged <strong>{}</strong>'
@@ -145,6 +146,13 @@ def runserver():
     
 @manager.command
 def build():
+    folder = 'build'
+    for file in os.listdir(folder):
+        if file not in ('.git', 'CNAME', '.gitignore'):
+            try:
+                os.unlink(os.path.join(folder, file))
+            except Exception, e:
+                print e
     freezer.freeze()
 
 
