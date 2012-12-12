@@ -3,6 +3,7 @@ import re
 import sys
 import shutil
 import datetime
+import subprocess
 import translitcodec
 from flask import Flask, render_template, Response, url_for
 from flask_flatpages import FlatPages, Page, pygments_style_defs
@@ -20,6 +21,7 @@ TAG_TITLE = 'Posts tagged <strong>{}</strong>'
 YEAR_TITLE = 'Posts from the year <strong>{:%Y}</strong>'
 MONTH_YEAR_TITLE = 'Posts from <strong>{:%b %Y}</strong>' 
 DAY_MONTH_YEAR_TITLE = 'Posts from <strong>{:%A, %b %d, %Y}</strong>' 
+EDITOR = 'gvim.exe'
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -160,7 +162,7 @@ def build():
 
 
 @manager.command
-def newpost(name):
+def post(name):
     post_dir = os.path.join(FLATPAGES_ROOT, POST_DIR)
     if not os.path.exists(post_dir):
         os.makedirs(post_dir)
@@ -173,10 +175,11 @@ def newpost(name):
         f.write('summary: \n')
         f.write('tags: []\n')
     print 'Begin editing {}'.format(file_name)
+    edit(file_name)
 
 
 @manager.command
-def newpage(name):
+def page(name):
     page_dir = os.path.join(FLATPAGES_ROOT, PAGE_DIR)
     if not os.path.exists(page_dir):
         os.makedirs(page_dir)
@@ -188,6 +191,14 @@ def newpage(name):
         f.write('date: {}\n'.format(date))
         f.write('summary: \n')
     print 'Begin editing {}'.format(file_name)
+    edit(file_name)
+
+
+def edit(file_name):
+    try:
+        subprocess.Popen([EDITOR, file_name])
+    except OSError:
+        print 'Cannot open file in editor {}.'.format(EDITOR)
 
 
 if __name__ == '__main__':
