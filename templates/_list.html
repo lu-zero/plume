@@ -1,6 +1,7 @@
 {% import 'dates.html' as dates %}
-<ul>
+<div class=entries>
 {% for post in posts %}
+  <div class="clear"></div>
   <div class="entry-list-item">
     <div class="date">{{ dates.pretty_date(post.date) }}</div>
     <div class="detail">
@@ -14,7 +15,7 @@
     </div>
   </div>
 {% endfor %}
-</ul>
 {% if not posts %}
     <p>No posts</p>
 {% endif %}
+</div>
