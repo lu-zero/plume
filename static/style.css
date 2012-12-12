@@ -46,6 +46,8 @@ p, div.line-block, ul, ol,
 pre                             { margin: 0; }
 dt                              { margin: 25px 0 16px 0; padding: 0; }
 dd                              { margin: 16px 0 25px 40px; padding: 0; }
+ul, ol                          { padding-left: 0px;
+                                  list-style-position: inside; }
 ul ol, ol ul, ul ul, ol ol      { margin: 10px 0; padding: 0 0 0 40px; }
 li                              { padding: 0; }
 h1 + p.date                     { margin-top: -32px; }
