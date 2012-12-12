@@ -6,7 +6,7 @@ import datetime
 import subprocess
 import translitcodec
 from flask import Flask, render_template, Response, url_for
-from flask_flatpages import FlatPages, Page, pygments_style_defs
+from flask_flatpages import FlatPages, pygments_style_defs
 from flask_frozen import Freezer
 from flask.ext.script import Manager
 
