@@ -7,3 +7,4 @@ Markdown==2.2.1
 PyYAML==3.10
 Pygments==1.5
 Werkzeug==0.8.3
+translitcodec==0.3
