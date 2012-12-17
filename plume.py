@@ -44,7 +44,7 @@ def slugify(text, delim=u'-'):
 
 
 def filter_posts(path='posts/', sort=True):
-    ps = [p for p in pages if path in p.path]
+    ps = [p for p in pages if path in p.path and p['published']]
     if sort:
         ps.sort(cmp=datesort, reverse=True)
     return ps
