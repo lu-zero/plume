@@ -174,6 +174,7 @@ def post(name):
         f.write('date: {}\n'.format(date))
         f.write('summary: \n')
         f.write('tags: []\n')
+        f.write('published: false\n')
     print 'Begin editing {}'.format(file_name)
     edit(file_name)
 
