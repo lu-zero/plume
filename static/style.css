@@ -8,6 +8,7 @@ body    { font: 17px/25px "Source Sans Pro", Palatino, Georgia,serif;
           margin: 0; padding: 0; font-weight: 400; }
 a       { color: black; font-weight: 400; }
 a:hover { color: #33CC33; }
+img     { border-style: none; }
 
 /* headlines */
 h1.title {
