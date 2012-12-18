@@ -10,49 +10,18 @@ a       { color: black; font-weight: 400; }
 a:hover { color: #33CC33; }
 
 /* headlines */
+h1.title {
+    font-size: 48px;
+    line-height: 52px;
+    margin-bottom: 0;
+    margin-top: 0;
+}
 h1, h2, h3, h4, h5, h6      { font-family: "Boogaloo", Palatino, Georgia,serif;
                               font-weight: 400; color: #222; }
 h1 a, h2 a, h3 a, h4 a,
 h5 a, h6 a                  { text-decoration: none; }
 h1 a:hover, h2 a:hover,
 h3 a:hover, h4 a:hover      { text-decoration: underline; }
-h1.title                    { width: 100%; }
-span.title                  { font-size: 20px; }
-h1, h2                      { margin: 10px 0 25px 0; }
-h1                          { font-size: 48px; line-height: 52px; }
-h2                          { font-size: 32px; line-height: 40px; }
-
-/* layout elements */
-div.container               { max-width: 740px; min-width: 320px; 
-                              margin: 28px auto; padding: 0 10px; }
-div.header                  { float: left; font-weight: 700;}
-div.header a                { font-weight: 400; text-decoration: none;
-                              font-family: Ubuntu, Palatino, Georgia, serif;
-                              font-size: 20px; }
-div.navigation              { float: right; }
-div.header, div.navigation  { height: 25px; margin-bottom: 42px; }
-div.navigation ul           { margin: 0; padding: 0; list-style: none; }
-div.navigation ul li        { display: inline; margin: 0 2px; padding: 0; }
-div.body                    { clear: both; }
-div.body p                  { font-size: 19px }
-div.footer                  { border-top: 1px solid #555; padding-top: 9px;
-                              margin-top: 42px; font-size: 14px;
-                              text-align: left; color: #555; }
-div.footer p                { margin: 0; }
-p#post_date                          { font-size: 14px; }
-
-/* margins and stuff */
-p, div.line-block, ul, ol,
-    table                       { margin: 25px 0 25px 0; }
-pre                             { margin: 0; }
-dt                              { margin: 25px 0 16px 0; padding: 0; }
-dd                              { margin: 16px 0 25px 40px; padding: 0; }
-ul, ol                          { padding-left: 0px;
-                                  list-style-position: inside; }
-ul ol, ol ul, ul ul, ol ol      { margin: 10px 0; padding: 0 0 0 40px; }
-li                              { padding: 0; text-indent: -1em; 
-                                  margin-left: 1em; }
-h1 + p.date                     { margin-top: -32px; }
 
 /* tables */
 table           { border: 1px solid #ddd; border-collapse: collapse;
@@ -60,52 +29,57 @@ table           { border: 1px solid #ddd; border-collapse: collapse;
 table.codehilitetable { width: 100%; }
 td, th          { padding: 0px 0px; border: 1px solid #ddd; }
 td.linenos      { padding: 0px 6px; }
+.linenodiv pre { margin-top: 0; margin-bottom: 0; }
 
-/* footnotes */
-table.footnote          { margin: 15px 0; background: transparent; border: none; }
-table.footnote td       { border: none; padding: 9px 0 0 0; font-size: 15px; }
-table.footnote td.label { padding-right: 10px; }
-table.footnote td p     { margin: 0; }
-table.footnote td p + p { margin-top: 15px; }
+div.header {
+    margin-bottom: 0;
+}
+.sitenav {
+    float: right;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.sitenav li {
+    display: inline;
+    margin: 0 2px;
+    padding: 0;
+}
+.post-summary h1,
+.post-summary p {
+    display: inline;
+}
+.post-summary h1::after {
+    content: " ";
+}
+.post-date time {
+    text-align: right;
+    float: right;
+    color: #118511;
+    font-size: 16px;
 
-/* blog overview */
-/* div.entry-list-item                  { margin: 25px 122px 25px 72px; }*/
-div.entries                          { max-width: 520px; margin: 5px auto; }
-div.entry-list-item                  { padding-top: 10px; }
-div.entry-list-item h1,
-div.entry-list-item div.summary,
-div.entry-list-item div.summary p    { display: inline; line-height: 25px; }
-div.entry-list-item h1               { margin: 0; font-size: 22px; }
-div.entry-list-item h1 a             { font-family: "Source Sans Pro",
-                                                   Palatino, Georgia,serif;
-                                      font-weight: 600; }
-div.entry-list-item div.summary,
-div.entry-list-item div.date,
-div.entry-list-item div.summary p    { margin: 0; padding: 0; }
-div.entry-list-item div.detail       { margin-left: 14px; float: left;
-                                       max-width: 400px; min-width: 200px;}
-div.entry-list-item div.date         { float: left; min-width: 100px;
-                                       max-width: 120px; color: #118511;
-                                       text-align: right; font-size: 16px;}
-div.entry-list-item h1               { font-weight: normal; }
-div.entry-list-item h1:after         { content: " - "; }
-div.clear                            { clear: both; }
+}
+div.footer {
+    margin-top: 10px;
+}
+footer p {
+    margin: 0;
+    color: #555;
+    font-size: 14px;
+}
+.footer hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc); 
+    background-image:    -moz-linear-gradient(left, #ccc, #333, #ccc); 
+    background-image:     -ms-linear-gradient(left, #ccc, #333, #ccc); 
+    background-image:      -o-linear-gradient(left, #ccc, #333, #ccc); 
+}
+time.verbose-date {
+    font-size: 14px;
+}
 
-/* other alignment things */
-img.align-center        { margin: 15px auto; display: block; }
-
-/* pagination */
-div.pagination          { margin: 36px 0 0 0; text-align: center; }
-div.pagination strong   { font-weight: normal; font-style: italic; }
-
-/* tags */
-p.tags          { text-align: right; }
-ul.tagcloud     { font-size: 16px; margin: 36px 0; padding: 0;
-                  list-style: none; }
-ul.tagcloud li  { margin: 0; padding: 0 10px; display: inline; }
-
-/* latex math */
-span.math img   { margin-bottom: -7px; }
 
 /* code formatting.  no monospace because of webkit (bug?) */
 pre, code, tt      { font-family: 'Ubuntu Mono', 'Consolas', 'Deja Vu Sans Mono',
@@ -113,7 +87,155 @@ pre, code, tt      { font-family: 'Ubuntu Mono', 'Consolas', 'Deja Vu Sans Mono'
                      font-size: 0.9em; }
 pre                { line-height: 1.3; background: none; padding: 0; }
 div.codehilite     { width: 100%; }
-div.codehilite pre { padding: 12px 12px; }
+div.codehilite pre { padding: 12px 12px; margin-top: 0; margin-bottom: 0; }
 code, pre          { font-family: Consolas,Monaco,"Courier New",monospace;
                      font-size: 90%; color: #555; line-height: 21px; }
 code               { background: white; }
+
+/* New grid-based css */
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+[class*='col-'] {
+    float: left;
+    padding-right: 20px;
+}
+
+[class*='col-']:last-of-type {
+    padding-right: 0px;
+}
+
+.grid {
+    width: 100%;
+    max-width: 940px;
+    min-width: 655px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.grid:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.grid-pad {
+    padding: 20px 0 0px 20px;
+}
+
+.grid-pad > [class*='col-']:last-of-type {
+    padding-right: 20px;
+}
+
+.push-right {
+    float: right;
+}
+
+/* Content Columns */
+
+.col-1-1 {
+    width: 100%;
+}
+.col-2-3, .col-8-12 {
+    width: 66.66%;
+}
+
+.col-1-2, .col-6-12 {
+    width: 50%;
+}
+
+.col-1-3, .col-4-12 {
+    width: 33.33%;
+}
+
+.col-1-4, .col-3-12 {
+    width: 25%;
+}
+
+.col-1-5 {
+    width: 20%;
+}
+
+.col-1-6, .col-2-12 {
+    width: 16.667%;
+}
+
+.col-1-7 {
+    width: 14.28%;
+}
+
+.col-1-8 {
+    width: 12.5%;
+}
+
+.col-1-9 {
+    width: 11.1%;
+}
+
+.col-1-10 {
+    width: 10%;
+}
+
+.col-1-11 {
+    width: 9.09%;
+}
+
+.col-1-12 {
+    width: 8.33%
+}
+
+/* Layout Columns */
+
+.col-11-12 {
+    width: 91.66%
+}
+
+.col-10-12 {
+    width: 83.333%;
+}
+
+.col-9-12 {
+    width: 75%;
+}
+
+.col-5-12 {
+    width: 41.66%;
+}
+
+.col-7-12 {
+    width: 58.33%
+}
+
+@media handheld, only screen and (max-width: 767px) {
+
+    .grid {
+        width: 100%;
+        min-width: 0;
+        margin-left: 0px;
+        margin-right: 0px;
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    [class*='col-'] {
+        width: auto;
+        float: none;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .sitenav {
+        float: none;
+    }
+    .post-date time {
+        float: none;
+        text-align: left;
+    }
+}

@@ -8,14 +8,16 @@
 {% block blognav %} class="active"{% endblock blognav %}
 
 {% block content %}
-  <h1 class="title">{{ page.title }}</h1>
-  {{ page.html|safe }}
-  <p class="tags">
-      {% for tag in page.tags %}
-        {% if loop.index0 %}
-            Tags: 
-        {% endif %}
-        <a href="{{ url_for('tag', tag=tag) }}">{{ tag }}</a>
-      {% endfor %}
-  </p>
+  <article class="col-1-1">
+    <h1 class="title">{{ page.title }}</h1>
+    {{ page.html|safe }}
+    <p class="tags">
+        {% for tag in page.tags %}
+          {% if loop.index0 %}
+              Tags: 
+          {% endif %}
+          <a href="{{ url_for('tag', tag=tag) }}">{{ tag }}</a>
+        {% endfor %}
+    </p>
+  </article>
 {% endblock content %}

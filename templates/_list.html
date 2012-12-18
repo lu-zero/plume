@@ -1,21 +1,21 @@
 {% import 'dates.html' as dates %}
-<div class=entries>
 {% for post in posts %}
-  <div class="clear"></div>
-  <div class="entry-list-item">
-    <div class="date">{{ dates.pretty_date(post.date) }}</div>
-    <div class="detail">
-     <h1 class="entry-list-item">
-     <a href="{{ url_for_post(post) }}">
-         {{ post.title }}
-     </a>
-     </h1><div class="summary">
-     <p>{{ post.summary }}</p>
-     </div>
+  <article class="grid grid-pad article">
+    <div class="col-3-12 post-date">
+      <time pubdate="pubdate">
+        {{ dates.pretty_date(post.date) }}
+      </time>
     </div>
-  </div>
+    <div class="col-7-12 post-summary">
+      <h1>
+        <a href="{{ url_for_post(post) }}">
+          {{ post.title }}
+        </a>
+      </h1>
+      <p>{{ post.summary }}</p>
+    </div>
+  </article>
 {% endfor %}
 {% if not posts %}
     <p>No posts</p>
 {% endif %}
-</div>
