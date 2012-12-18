@@ -26,9 +26,10 @@ h3 a:hover, h4 a:hover      { text-decoration: underline; }
 /* tables */
 table           { border: 1px solid #ddd; border-collapse: collapse;
                   background: #fafafa; }
-table.codehilitetable { width: 100%; }
+table.codehilitetable { width: 100%; table-layout: fixed; }
 td, th          { padding: 0px 0px; border: 1px solid #ddd; }
-td.linenos      { padding: 0px 6px; }
+td.linenos      { padding: 0px 6px; width: 35px; vertical-align: top; padding-top: 12px; }
+td.code         { overflow-x: scroll; text-overflow: ellipsis; white-space: nowrap; vertical-align: top; }
 .linenodiv pre { margin-top: 0; margin-bottom: 0; }
 
 div.header {
