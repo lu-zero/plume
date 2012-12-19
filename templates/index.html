@@ -3,7 +3,7 @@
 {% block content %}
     {% if title %}
         <section class="grid grid-pad">
-        <header class="title">{{ title|safe }}</header>
+        <header class="col-8-12 offset-2-12 title">{{ title|safe }}</header>
     {% endif %}
     {% with pages=pages %}
         {% include "_list.html" %}

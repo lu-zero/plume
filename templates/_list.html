@@ -1,12 +1,12 @@
 {% import 'dates.html' as dates %}
 {% for post in posts %}
   <article class="grid grid-pad article">
-    <div class="col-3-12 post-date">
+    <div class="col-2-12 offset-2-12 post-date">
       <time pubdate="pubdate">
         {{ dates.pretty_date(post.date) }}
       </time>
     </div>
-    <div class="col-7-12 post-summary">
+    <div class="col-6-12 post-summary">
       <h1>
         <a href="{{ url_for_post(post) }}">
           {{ post.title }}

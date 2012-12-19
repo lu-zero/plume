@@ -8,9 +8,9 @@
 {% block blognav %} class="active"{% endblock blognav %}
 
 {% block content %}
-  <article class="col-1-1">
+  <article class="col-8-12 offset-2-12">
     <h1 class="title">{{ post.title }}</h1>
-    <time pubdate="pubdate" class="verbose-date">
+    <time pubdate="pubdate" class="small">
       written on {{ dates.pretty_day_date(post.date) }}
     </time>
     {{ post.html|safe }}

@@ -5,20 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Home{% endblock title %} | Jeremy Axmacher's Writings</title>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='grid.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('pygments_css') }}" type="text/css">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
   </head>
   <body>
       <div class="grid grid-pad header">
-          <header class="col-5-12">
+          <header class="col-4-12 offset-2-12">
            <h1>
             <a href="{{ url_for('index') }}">
-                <img alt="Jeremy Axmacher" src="{{ url_for('static', filename='img/header.png') }}" />
+                <img alt="" src="{{ url_for('static', filename='img/icon.png') }}" />
+                {{ config.SITENAME }}
             </a>
            </h1>
           </header>
-          <nav class="col-7-12">
+          <nav class="col-4-12">
             <ul class="sitenav">
               <li><a href="{{ url_for('index') }}">blog</a> | 
               <li><a href="{{ url_for('page', name='about') }}">about</a>
@@ -30,20 +32,20 @@
       {% endblock content %}
       </div>
       <div class="grid grid-pad footer">
-        <hr class="col-1-1" />
-        <footer class="col-1-1">
-        <p>&copy; Copyright 2012 by Jeremy Axmacher.</p>
-        <p>
-          Content licensed under the Creative Commons
-          attribution-noncommercial-sharealike License.
-        </p>
-        <p>
-          Contact me via <a href="mailto:jeremy@obsoleter.com">mail</a> or 
-          <a href="http://github.com/obsoleter">github</a>.
-        </p>
-        <!--
-        (<a href="/feed.atom" rel="alternate" title="Recent Blog Posts">feed</a>)
-        -->
+        <hr class="col-8-12 offset-2-12" />
+        <footer class="col-8-12 offset-2-12">
+          <p>&copy; Copyright 2012 by Jeremy Axmacher.</p>
+          <p>
+            Content licensed under the Creative Commons
+            attribution-noncommercial-sharealike License.
+          </p>
+          <p>
+            Contact me via <a href="mailto:jeremy@obsoleter.com">mail</a> or 
+            <a href="http://github.com/obsoleter">github</a>.
+          </p>
+          <!--
+          (<a href="/feed.atom" rel="alternate" title="Recent Blog Posts">feed</a>)
+          -->
         </footer>
       </div>
     </div>
