@@ -16,7 +16,7 @@ a {
     text-decoration: none;
 }
 a:hover {
-    color: #33CC33;
+    color: #11AA00;
     text-decoration: underline;
 }
 img {
@@ -77,7 +77,7 @@ div.header {
 .post-date time {
     text-align: right;
     float: right;
-    color: #118511;
+    color: #11AA00;
     font-size: 16px;
 
 }
