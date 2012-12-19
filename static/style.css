@@ -4,38 +4,56 @@
 @import url(http://fonts.googleapis.com/css?family=Boogaloo);
 
 /* general style */
-body    { font: 17px/25px "Source Sans Pro", Palatino, Georgia,serif;
-          margin: 0; padding: 0; font-weight: 400; }
-a       { color: black; font-weight: 400; }
-a:hover { color: #33CC33; }
-img     { border-style: none; }
-
-/* headlines */
-h1.title {
-    font-size: 48px;
-    line-height: 52px;
-    margin-bottom: 0;
-    margin-top: 0;
+body {
+    font: 17px/25px "Source Sans Pro", Palatino, Georgia,serif;
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
 }
-h1, h2, h3, h4, h5, h6      { font-family: "Boogaloo", Palatino, Georgia,serif;
-                              font-weight: 400; color: #222; }
-h1 a, h2 a, h3 a, h4 a,
-h5 a, h6 a                  { text-decoration: none; }
-h1 a:hover, h2 a:hover,
-h3 a:hover, h4 a:hover      { text-decoration: underline; }
+a {
+    color: #333;
+    font-weight: 400;
+    text-decoration: none;
+}
+a:hover {
+    color: #33CC33;
+    text-decoration: underline;
+}
+img {
+    border-style: none;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Boogaloo", Palatino, Georgia,serif;
+    font-weight: 400;
+    color: #222;
+}
+table {
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    background: #fafafa;
+}
+td, th {
+    padding: 0px 0px;
+    border: 1px solid #ddd;
+}
 
-/* tables */
-table           { border: 1px solid #ddd; border-collapse: collapse;
-                  background: #fafafa; }
-table.codehilitetable { width: 100%; table-layout: fixed; }
-td, th          { padding: 0px 0px; border: 1px solid #ddd; }
-td.linenos      { padding: 0px 6px; width: 35px; vertical-align: top; padding-top: 12px; }
-td.code         { overflow-x: scroll; text-overflow: ellipsis; white-space: nowrap; vertical-align: top; }
-.linenodiv pre { margin-top: 0; margin-bottom: 0; }
-
+/* Site header formatting */
 div.header {
     margin-bottom: 0;
 }
+.header h1 {
+    font-size: 1.6em;
+    color: #222;
+    margin-top: 0;
+}
+.header h1 a {
+    vertical-align: middle;
+}
+.header h1 a img {
+    vertical-align: middle;
+}
+
+/* Site navigation formatting */
 .sitenav {
     float: right;
     margin: 0;
@@ -47,6 +65,8 @@ div.header {
     margin: 0 2px;
     padding: 0;
 }
+
+/* Index page formatting */
 .post-summary h1,
 .post-summary p {
     display: inline;
@@ -61,6 +81,19 @@ div.header {
     font-size: 16px;
 
 }
+
+/* page/post detail page formatting */
+h1.title {
+    font-size: 48px;
+    line-height: 52px;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.small {
+    font-size: 14px;
+}
+
+/* footer styles */
 div.footer {
     margin-top: 10px;
 }
@@ -78,164 +111,54 @@ footer p {
     background-image:     -ms-linear-gradient(left, #ccc, #333, #ccc); 
     background-image:      -o-linear-gradient(left, #ccc, #333, #ccc); 
 }
-time.verbose-date {
-    font-size: 14px;
+
+/* general code formatting. */
+pre {
+    background: none;
+    padding: 0;
 }
-
-
-/* code formatting.  no monospace because of webkit (bug?) */
-pre, code, tt      { font-family: 'Ubuntu Mono', 'Consolas', 'Deja Vu Sans Mono',
-                     'Bitstream Vera Sans Mono', 'Monaco', 'Courier New';
-                     font-size: 0.9em; }
-pre                { line-height: 1.3; background: none; padding: 0; }
-div.codehilite     { width: 100%; }
-div.codehilite pre { padding: 12px 12px; margin-top: 0; margin-bottom: 0; }
-code, pre          { font-family: Consolas,Monaco,"Courier New",monospace;
-                     font-size: 90%; color: #555; line-height: 21px; }
-code               { background: white; }
-
-/* New grid-based css */
-*, *:after, *:before {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+code, pre {
+    font-family: Consolas,'Ubuntu Mono',monospace;
+    font-size: 90%;
+    color: #555;
+    line-height: 21px;
 }
-
-[class*='col-'] {
-    float: left;
-    padding-right: 20px;
-}
-
-[class*='col-']:last-of-type {
-    padding-right: 0px;
-}
-
-.grid {
+table.codehilitetable {
     width: 100%;
-    max-width: 940px;
-    min-width: 655px;
-    margin: 0 auto;
-    overflow: hidden;
+    table-layout: fixed;
 }
-
-.grid:after {
-    content: "";
-    display: table;
-    clear: both;
+/* line number formatting for code samples */
+td.linenos {
+    padding: 12px 6px 0px 6px;
+    width: 35px;
+    vertical-align: top;
 }
-
-.grid-pad {
-    padding: 20px 0 0px 20px;
+div.linenodiv pre {
+    margin: 0;
 }
-
-.grid-pad > [class*='col-']:last-of-type {
-    padding-right: 20px;
+/* code formatting for code samples */
+td.code {
+    white-space: nowrap;
+    vertical-align: top;
 }
-
-.push-right {
-    float: right;
-}
-
-/* Content Columns */
-
-.col-1-1 {
+div.codehilite {
+    overflow-x: scroll;
+    text-overflow: ellipsis;
     width: 100%;
 }
-.col-2-3, .col-8-12 {
-    width: 66.66%;
+div.codehilite pre {
+    padding: 12px 12px;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
-.col-1-2, .col-6-12 {
-    width: 50%;
-}
-
-.col-1-3, .col-4-12 {
-    width: 33.33%;
-}
-
-.col-1-4, .col-3-12 {
-    width: 25%;
-}
-
-.col-1-5 {
-    width: 20%;
-}
-
-.col-1-6, .col-2-12 {
-    width: 16.667%;
-}
-
-.col-1-7 {
-    width: 14.28%;
-}
-
-.col-1-8 {
-    width: 12.5%;
-}
-
-.col-1-9 {
-    width: 11.1%;
-}
-
-.col-1-10 {
-    width: 10%;
-}
-
-.col-1-11 {
-    width: 9.09%;
-}
-
-.col-1-12 {
-    width: 8.33%
-}
-
-/* Layout Columns */
-
-.col-11-12 {
-    width: 91.66%
-}
-
-.col-10-12 {
-    width: 83.333%;
-}
-
-.col-9-12 {
-    width: 75%;
-}
-
-.col-5-12 {
-    width: 41.66%;
-}
-
-.col-7-12 {
-    width: 58.33%
-}
-
+/* Responsive layout changes */
 @media handheld, only screen and (max-width: 767px) {
-
-    .grid {
-        width: 100%;
-        min-width: 0;
-        margin-left: 0px;
-        margin-right: 0px;
-        padding-left: 0px;
-        padding-right: 0px;
-    }
-
-    [class*='col-'] {
-        width: auto;
-        float: none;
-        margin-left: 0px;
-        margin-right: 0px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
+    /* Align navigation to left */
     .sitenav {
         float: none;
     }
+    /* Align post date to left */
     .post-date time {
         float: none;
         text-align: left;
