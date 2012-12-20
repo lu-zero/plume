@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="grid grid-pad body">
     {% if title %}
         <section class="grid grid-pad">
         <header class="col-8-12 offset-2-12 title">{{ title|safe }}</header>
@@ -14,4 +15,5 @@
       <span class=disabled>&laquo; Previous</span> &mdash; <strong>1</strong> &mdash; <a href="/page/2/">Next &raquo;</a>
     </div>
     -->
+</div>
 {% endblock content %}
