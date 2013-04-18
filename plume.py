@@ -105,6 +105,16 @@ def url_for_post(post):
 app.jinja_env.globals['url_for_post'] = url_for_post
     
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+
+@app.route('/404.html')
+def fourohfour():
+    return render_template('404.html')
+
+
 @app.route('/pygments.css')
 def pygments_css():
     return pygments_style_defs('tango'), 200, {'Content-Type': 'text/css'}
