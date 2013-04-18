@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 
 {% macro render_pagination(pagination) %}
+{% if pagination %}
   <div class=pagination>
+  <br />
+  {% if pagination.has_prev %}
+    <a href="{{ url_for_other_page(pagination.page - 1)
+      }}">&laquo; Previous</a>
+  {% endif %}
   {%- for page in pagination.iter_pages() %}
     {% if page %}
       {% if page != pagination.page %}
@@ -10,7 +16,7 @@
         <strong>{{ page }}</strong>
       {% endif %}
     {% else %}
-      <span class=ellipsis>…</span>
+      <span class=ellipsis>&hellip;</span>
     {% endif %}
   {%- endfor %}
   {% if pagination.has_next %}
@@ -18,6 +24,7 @@
       }}">Next &raquo;</a>
   {% endif %}
   </div>
+{% endif %}
 {% endmacro %}
 
 {% block content %}

@@ -45,6 +45,10 @@ class Pagination(object):
         if self.page < 1 or self.page > self.pages:
             abort(404)
 
+    def __bool__(self):
+        return self.pages > 1
+    __nonzero__ = __bool__
+
     @property
     def pages(self):
         return int(ceil(self.total_count / float(self.per_page)))
