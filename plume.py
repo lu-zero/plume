@@ -5,7 +5,8 @@ import shutil
 import datetime
 import subprocess
 import translitcodec
-from flask import Flask, render_template, Response, url_for
+from math import ceil
+from flask import Flask, render_template, Response, url_for, request, abort
 from flask_flatpages import FlatPages, pygments_style_defs
 from flask_frozen import Freezer
 from flask.ext.script import Manager
@@ -23,6 +24,7 @@ YEAR_TITLE = 'Posts from the year <strong>{:%Y}</strong>'
 MONTH_YEAR_TITLE = 'Posts from <strong>{:%b %Y}</strong>' 
 DAY_MONTH_YEAR_TITLE = 'Posts from <strong>{:%A, %b %d, %Y}</strong>' 
 EDITOR = 'gvim.exe'
+PER_PAGE = 15
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -32,6 +34,44 @@ manager = Manager(app)
 
 datesort = lambda x,y: cmp(x['date'], y['date'])
 _punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
+
+
+class Pagination(object):
+
+    def __init__(self, page, per_page, total_count):
+        self.page = page
+        self.per_page = per_page
+        self.total_count = total_count
+        if self.page < 1 or self.page > self.pages:
+            abort(404)
+
+    @property
+    def pages(self):
+        return int(ceil(self.total_count / float(self.per_page)))
+
+    @property
+    def has_prev(self):
+        return self.page > 1
+
+    @property
+    def has_next(self):
+        return self.page < self.pages
+
+    def slice(self, items):
+        return items[(self.page - 1) * self.per_page:self.page * self.per_page]
+
+    def iter_pages(self, left_edge=2, left_current=2, right_current=5,
+                   right_edge=2):
+        last = 0
+        for num in xrange(1, self.pages + 1):
+            if num <= left_edge or \
+               (num > self.page - left_current - 1 and \
+                num < self.page + right_current) or \
+               num > self.pages - right_edge:
+                if last + 1 != num:
+                    yield None
+                yield num
+                last = num
 
 
 def slugify(text, delim=u'-'):
@@ -51,6 +91,13 @@ def filter_posts(path='posts/', sort=True):
     return ps
 
 
+def url_for_other_page(page):
+    args = request.view_args.copy()
+    args['page'] = page
+    return url_for(request.endpoint, **args)
+app.jinja_env.globals['url_for_other_page'] = url_for_other_page
+
+
 def url_for_post(post):
     post_name = post.path.split('-', 3)[-1]
     return url_for('post', year=post['date'].year, month=post['date'].month,
@@ -63,43 +110,66 @@ def pygments_css():
     return pygments_style_defs('tango'), 200, {'Content-Type': 'text/css'}
     
 
-@app.route('/')
-def index():
-    return render_template('index.html', posts=filter_posts())
+@app.route('/', defaults={'page': 1})
+@app.route('/page/<int:page>/')
+def index(page):
+    posts = filter_posts()
+    pagination = Pagination(page, PER_PAGE, len(posts))
+    posts = pagination.slice(posts)
+    return render_template('index.html', posts=posts, pagination=pagination)
 
 
-@app.route('/tags/<path:tag>/')
-def tag(tag):
+@app.route('/tags/<path:tag>/', defaults={'page': 1})
+@app.route('/tags/<path:tag>/<int:page>/')
+def tag(tag, page):
     posts = [p for p in pages if tag in p.meta.get('tags', [])]
     posts.sort(cmp=datesort, reverse=True)
+    pagination = Pagination(page, PER_PAGE, len(posts))
+    posts = pagination.slice(posts)
     return render_template('index.html',
+        pagination=pagination,
         posts=posts, title=TAG_TITLE.format(tag))
 
 
-@app.route('/<int:year>/')
-def post_year(year):
+@app.route('/<int:year>/', defaults={'page': 1})
+@app.route('/<int:year>/page/<int:page>/')
+def post_year(year, page):
     d = datetime.datetime(year, 1, 1)
     path ='{}/{:%Y}'.format(POST_DIR, d)
+    posts = filter_posts(path=path)
+    pagination = Pagination(page, PER_PAGE, len(posts))
+    posts = pagination.slice(posts)
     return render_template('index.html',
-        posts=filter_posts(path=path),
+        posts=posts,
+        pagination=pagination,
         title=YEAR_TITLE.format(d))
 
 
-@app.route('/<int:year>/<int:month>/')
-def post_year_month(year, month):
+@app.route('/<int:year>/<int:month>/', defaults={'page': 1})
+@app.route('/<int:year>/<int:month>/page/<int:page>/')
+def post_year_month(year, month, page):
     d = datetime.datetime(year, month, 1)
     path ='{}/{:%Y-%m}'.format(POST_DIR, d)
+    posts = filter_posts(path=path)
+    pagination = Pagination(page, PER_PAGE, len(posts))
+    posts = pagination.slice(posts)
     return render_template('index.html',
-        posts=filter_posts(path=path),
+        posts=posts,
+        pagination=pagination,
         title=MONTH_YEAR_TITLE.format(d))
 
 
-@app.route('/<int:year>/<int:month>/<int:day>/')
-def post_year_month_day(year, month, day):
+@app.route('/<int:year>/<int:month>/<int:day>/', defaults={'page': 1})
+@app.route('/<int:year>/<int:month>/<int:day>/page/<int:page>/')
+def post_year_month_day(year, month, day, page):
     d = datetime.datetime(year, month, day)
     path ='{}/{:%Y-%m-%d}'.format(POST_DIR, d)
+    posts = filter_posts(path=path)
+    pagination = Pagination(page, PER_PAGE, len(posts))
+    posts = pagination.slice(posts)
     return render_template('index.html',
-        posts=filter_posts(path=path),
+        posts=posts,
+        pagination=pagination,
         title=DAY_MONTH_YEAR_TITLE.format(d))
 
 
@@ -132,6 +202,13 @@ def post_year_month():
     posts = filter_posts()
     for year, month in {(p['date'].year, p['date'].month) for p in posts}:
         yield dict(year=year, month=month)
+
+
+@freezer.register_generator
+def post_year():
+    posts = filter_posts()
+    for year in {p['date'].year for p in posts}:
+        yield dict(year=year)
 
 
 @freezer.register_generator

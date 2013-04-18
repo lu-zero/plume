@@ -1,5 +1,25 @@
 {% extends "base.html" %}
 
+{% macro render_pagination(pagination) %}
+  <div class=pagination>
+  {%- for page in pagination.iter_pages() %}
+    {% if page %}
+      {% if page != pagination.page %}
+        <a href="{{ url_for_other_page(page) }}">{{ page }}</a>
+      {% else %}
+        <strong>{{ page }}</strong>
+      {% endif %}
+    {% else %}
+      <span class=ellipsis>…</span>
+    {% endif %}
+  {%- endfor %}
+  {% if pagination.has_next %}
+    <a href="{{ url_for_other_page(pagination.page + 1)
+      }}">Next &raquo;</a>
+  {% endif %}
+  </div>
+{% endmacro %}
+
 {% block content %}
 <div class="grid grid-pad body">
     {% if title %}
@@ -9,6 +29,9 @@
     {% with pages=pages %}
         {% include "_list.html" %}
     {% endwith %}
+    <footer class="col-8-12 offset-2-12">
+        {{ render_pagination(pagination) }}
+    </footer>
         </section>
     <!--
     <div class=pagination>
