@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('pygments_css') }}" type="text/css">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <link rel="alternate" title="Recent Changes" type="application/atom+xml" href="{{ url_for('recent_feed') }}">
   </head>
   <body>
       <div class="grid grid-pad header">

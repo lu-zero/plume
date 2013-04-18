@@ -6,12 +6,16 @@ import datetime
 import subprocess
 import translitcodec
 from math import ceil
+from urlparse import urljoin
 from flask import Flask, render_template, Response, url_for, request, abort
 from flask_flatpages import FlatPages, pygments_style_defs
 from flask_frozen import Freezer
 from flask.ext.script import Manager
+from werkzeug.contrib.atom import AtomFeed
 
 SITENAME = "Jeremy Axmacher's Writings"
+AUTHOR = 'Jeremy Axmacher'
+SITE_ROOT = 'http://obsoleter.com/'
 DEBUG = True
 FLATPAGES_AUTO_RELOAD = DEBUG
 FLATPAGES_EXTENSION = '.md'
@@ -78,6 +82,9 @@ class Pagination(object):
                 last = num
 
 
+def make_external(url):
+    return urljoin(SITE_ROOT, url)
+
 def slugify(text, delim=u'-'):
     """Generates an ASCII-only slug."""
     result = []
@@ -112,6 +119,21 @@ app.jinja_env.globals['url_for_post'] = url_for_post
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
+
+@app.route('/recent.atom')
+def recent_feed():
+    feed = AtomFeed('Recent Articles',
+                    feed_url=request.url, url=request.url_root)
+    posts = filter_posts()[:15]
+    for post in posts:
+        feed.add(post['title'], unicode(post.html),
+                 content_type='html',
+                 author=post.meta.get('author', AUTHOR),
+                 url=make_external(url_for_post(post)),
+                 updated=post['date'],
+                 published=post['date'])
+    return feed.get_response()
 
 
 @app.route('/404.html')
