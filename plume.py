@@ -30,6 +30,7 @@ MONTH_YEAR_TITLE = 'Posts from <strong>{:%b %Y}</strong>'
 DAY_MONTH_YEAR_TITLE = 'Posts from <strong>{:%A, %b %d, %Y}</strong>' 
 EDITOR = 'gvim.exe'
 PER_PAGE = 15
+FREEZER_REMOVE_EXTRA_FILES = False
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -263,16 +264,6 @@ def runserver():
     
 @manager.command
 def build():
-    folder = 'build'
-    for file in os.listdir(folder):
-        if file not in ('.git', 'CNAME', '.gitignore'):
-            try:
-                os.unlink(os.path.join(folder, file))
-            except Exception, e:
-                try:
-                    shutil.rmtree(os.path.join(folder, file))
-                except Exception, e:
-                    pass
     freezer.freeze()
 
 
