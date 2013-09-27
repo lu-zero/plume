@@ -55,6 +55,9 @@ div.header {
 }
 
 /* Site navigation formatting */
+#navigation {
+    padding-right: 20px;
+}
 .sitenav {
     float: right;
     margin: 0;
@@ -64,7 +67,13 @@ div.header {
 .sitenav li {
     display: inline;
     margin: 0 2px;
-    padding: 0;
+    padding: 0 8px 0 0;
+    border-right: 1px solid black;
+}
+.sitenav li:last-child {
+    border-right: 0;
+    padding-right 0;
+    margin-right: 0;
 }
 .sitenav a {
     font-weight: 400;
@@ -96,10 +105,24 @@ h1.title {
 .small {
     font-size: 14px;
 }
+.thinkful_image figcaption {
+    font-size: 0.75em;
+    font-weight: bold;
+    text-align: center;
+}
+.thinkful_image a {
+    display: block;
+    border: 1px solid gray;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px #888888;
+}
+.body img {
+    width: 100%;
+}
 
 /* footer styles */
 div.footer {
-    margin-top: 10px;
+    margin-top: -15px;
     margin-bottom: 30px;
 }
 footer p {

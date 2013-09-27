@@ -256,6 +256,14 @@ def post_year():
         yield dict(year=year)
 
 
+@freezer.register_generator
+def page_generator():
+    ps = [p for p in pages if 'pages/' in p.path]
+    for p in ps:
+        path = os.path.split(p.path)[-1]
+        yield '/{}/'.format(path)
+
+
 # Script commands
 @manager.command
 def runserver():
