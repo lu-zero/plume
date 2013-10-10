@@ -110,14 +110,15 @@ h1.title {
     font-weight: bold;
     text-align: center;
 }
-.thinkful_image a {
+.thinkful_image a img {
+    height: 300px;
+    width: auto;
     display: block;
+    margin-left: auto;
+    margin-right: auto;
     border: 1px solid gray;
     border-radius: 3px;
     box-shadow: 2px 2px 2px #888888;
-}
-.thinkful_image a img {
-    margin-bottom: -7px;
 }
 .body img {
     width: 100%;
